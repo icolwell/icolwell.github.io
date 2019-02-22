@@ -2,12 +2,14 @@
 layout: post
 title:  "Updating Multiple Namecheap Domains With ddclient"
 date:   2019-02-21 18:00:00 -0500
-tags: server linux
+categories: tech
+tags: [server management, linux]
+comments: true
 ---
 ## Introduction
 
 If you are having trouble trying to update multiple namecheap domains from a single ddclient config: you aren't alone, and have no fear, there are solutions.
-If you are interested in the complicated history behind this problem, see [this post]().
+If you are interested in the complicated history behind this problem, see [this post](updating-multiple-namecheap-domains-with-ddclient-a-history).
 Otherwise, the following are to-the-point instructions on how to get it working.
 
 First I'll cover what the config should look like for updating multiple namecheap domains, then follows install instructions to make sure you have a version of ddclient that allows multiple namecheap domain updates.
