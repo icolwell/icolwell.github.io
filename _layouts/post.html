@@ -11,8 +11,8 @@ layout: default
         Published: {{ page.date | date: date_format }}
         <br>
         Updated:&nbsp;
-        {%- if page.last-updated -%}
-            {{ page.last-updated | date: date_format }}
+        {%- if page.updated -%}
+            {{ page.updated | date: date_format }}
         {%- else -%}
             {{ page.date | date: date_format }}
         {%- endif -%}
