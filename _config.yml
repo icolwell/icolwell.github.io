@@ -26,14 +26,16 @@ permalink: /:title
 # twitter_username: jekyllrb
 github_username:  icolwell
 
+matomo: true
+disqus:
+  shortname: ians-tech-blog
+
 # Build settings
 markdown: kramdown
 theme: minima
 plugins:
   - jekyll-feed
 
-disqus:
-  shortname: ians-tech-blog
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
