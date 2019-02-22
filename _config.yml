@@ -17,7 +17,7 @@ title: Ian's Tech Blog
 # email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
   I use this blog to post solutions to tech-related problems that I run into.
-  You may see posts related to linux server management, web development,
+  You may see posts about linux server management, web development,
   or maybe even content related to my day job as an autonomous vehicle
   developer.
 baseurl: "" # the subpath of your site, e.g. /blog

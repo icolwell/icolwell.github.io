@@ -25,13 +25,14 @@ His post seems to be based off of someone else's comment on the ddclient sourcef
 
 **August 2012**  
 ThorneLabs publishes a [blog post](https://thornelabs.blog/posts/linux-make-ddclient-work-with-multiple-namecheap-domains.html)
-which just seems to be a straight copy of Robert's original post (without crediting Robert? dude... not cool).
+which just seems to be a more detailed copy of Robert's original post.
+The proposed patch to ddclient is identical to Robert's (odd that he didn't credit Robert) except that it's aimed at version 3.8.1 (Robert's patch was for 3.8.0).
 
 **Sometime after August 2012**  
 People ask about multiple domain updates in the Namecheap official ddclient docs.
 Users and Namecheap moderators refer them to the ThorneLabs blog post as a solution.
 
-**October 8th 2014**  
+**October 8th, 2014**  
 Robert submits a [github pull request](https://github.com/ddclient/ddclient/pull/7) to fix the issue once and for all.
 The PR is accepted and ddclient 3.8.3 now updates multiple namecheap domains without the need to patch it, and there was much rejoicing.
 However, Namecheap fails to update their documentation regarding all this and simply refers people to a now outdated patch method.

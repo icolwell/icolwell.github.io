@@ -20,7 +20,7 @@ All I am really doing is providing a 2019 update to his original work.
 ## The ddclient Config
 
 The config is very similar to what is shown in the [official namecheap docs](https://www.namecheap.com/support/knowledgebase/article.aspx/583/11/how-do-i-configure-ddclient), except for a few details.
-If you are totally new to ddclient configuration, you may want to see the [ddclient docs](https://sourceforge.net/p/ddclient/wiki/usage/).
+If you are totally new to ddclient configuration, you may want to read the [ddclient docs](https://sourceforge.net/p/ddclient/wiki/usage/).
 
 ```
 #### Global Settings
@@ -61,7 +61,7 @@ ddclient -help | grep "ddclient version"
 ```
 
 ## Easiest Install Option (3.8.3)
-Install ddclient version 3.8.3. If you need a newer version (3.9.0) of ddclient, see the next section.
+The easiest solution is to simply install ddclient version 3.8.3. If you need a newer version (3.9.0) of ddclient, see the next section.
 
 ### Ubuntu/Debian users:
 If you are running Ubuntu 18.04 you can get ddclient 3.8.3 from the package manager using the following:
@@ -93,17 +93,19 @@ sudo service ddclient restart
 If you aren't running Ubuntu, [download ddclient 3.8.3](https://github.com/ddclient/ddclient/archive/v3.8.3.tar.gz) and follow the install instructions in the provided `README.md`.
 
 ## Other Install Option (3.9.0)
-If you need ddclient 3.9.0 it can be patched to add the parsing support we need for multiple namecheap domains.
+If you need ddclient 3.9.0, it can be patched to add the parsing support needed for multiple namecheap domains.
 
 ### Ubuntu/Debian users:
 
-1. Install ddclient using my install script. It will patch ddclient as needed.
+1. Install ddclient using my install script. It will patch ddclient as required.
 ```
 wget https://raw.githubusercontent.com/icolwell/install_scripts/master/ddclient_install.bash
 bash ddclient_install.bash -v 3.9.0
 ```
 
-2. Edit the config at `/etc/ddclient/ddclient.conf` and then restart ddclient:
+2. Edit the config at `/etc/ddclient/ddclient.conf`.
+
+3. Restart ddclient:
 ```
 sudo service ddclient restart
 ```
@@ -126,3 +128,8 @@ sudo patch --verbose < /tmp/ddclient.patch
 ```
 
 5. Restart ddclient using distro service tools.
+
+## Related Links
+- [Making DDClient work with multiple domains on namecheap](https://robertianhawdon.me.uk/2010/09/03/making-ddclient-work-with-multiple-domains-on-namecheap/) (old patch method)
+- [Linux Make ddclient Work with Multiple Namecheap Domains](https://thornelabs.blog/posts/linux-make-ddclient-work-with-multiple-namecheap-domains.html) (old patch method)
+- [How do I configure DDClient?](https://www.namecheap.com/support/knowledgebase/article.aspx/583/11/how-do-i-configure-ddclient) (namecheap docs)
