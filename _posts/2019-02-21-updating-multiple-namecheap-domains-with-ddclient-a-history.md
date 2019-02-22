@@ -2,11 +2,18 @@
 layout: post
 title:  "Updating Multiple Namecheap Domains With ddclient - A History"
 date:   2019-02-21 18:00:00 -0500
+updated: 2019-02-22 14:00:00 -0500
 categories: tech
 tags: [server management, linux]
 comments: true
 ---
+
+This post is the result of my ddclient debug efforts.
+I was trying figure out why I couln't update multiple namecheap domains even though existing info suggested it should work.
+This post is a historical analysis of the problem, if you are looking for a solution to this issue, see my [other post](updating-multiple-namecheap-domains-with-ddclient).
+
 ## Introduction
+
 If you are trying to update multiple namecheap domains and visit the [official namecheap documentation](https://www.namecheap.com/support/knowledgebase/article.aspx/583/11/how-do-i-configure-ddclient)
 regarding how to configure ddclient, you will find moderators in the comments directing people towards [this blog post](https://thornelabs.blog/posts/linux-make-ddclient-work-with-multiple-namecheap-domains.html) from 2012.
 
@@ -43,13 +50,13 @@ Robert's original fixes are [removed](https://github.com/ddclient/ddclient/pull/
 so that ddclient's behaviour can be "aligned" with the
 [official documentation](https://www.namecheap.com/support/knowledgebase/article.aspx/583/11/how-do-i-configure-ddclient).
 The official documentation doesn't even mention anything about updating multiple domains (it only mentions multiple sub-domains), so I'm not sure what the intent of this PR was.
-I guess if you consider the comment links to the old patch to be part of the official documentation, then yes, I suppose removing good functionality so that it can be patched via the blog post again would be "aligning" ddclient with the offical docs.
+I guess if you consider the comment links to the old patch method to be part of the official documentation, then yes, I suppose removing good functionality so that it can be patched via the blog post again would be "aligning" ddclient with the offical docs.
 I can't blame anyone for this except Namecheap, since they are the ones that haven't added these important details to their docs for 4+ years.
 Unfortunately, this change made it into ddclient version 3.9.0, which means we are back to having to patch the latest version of ddclient or use an older version of it (3.8.3).
 
 **August 29th, 2018**  
 Eric Rucker submits a [bug report](https://sourceforge.net/p/ddclient/bugs/89/)
-explaining the problem with [PR #54](https://github.com/ddclient/ddclient/pull/54).
+explaining the problem with [PR #54](https://github.com/ddclient/ddclient/pull/54) ([r204](https://sourceforge.net/p/ddclient/code/204/)).
 I find this bug report and start to make sense of it all.
 Thanks Eric!
 
