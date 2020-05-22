@@ -1,7 +1,25 @@
+# Godot Networking Cheatsheet
+
+## Introduction
+
+This page is meant to be a quick reference guide to facilitate finding functions or specific syntax required for Godot networking.
+I suggest also reading the [official docs](https://docs.godotengine.org/en/stable/tutorials/networking/index.html), some of the content in this post is directly copied from them.
+
 ## Establishing Connections
 
 One game instance can connect to one or more other game instances.
-Typically the server or host instance connects to all clients, but the clients each only connect to the server (Is this true?).
+The other game instance can be running on the same computer or a different computer.
+In general, there are two typical connection strategies that video games use:
+1. **Client-Server**  
+In this case, each player's game instance connects to one central game server instance.
+The server instance is usually a special version of the game that doesn't have a GUI and is running at all times waiting for players to connect.
+There is no need for players to connect to each other, they only need to establish a connection to the server.
+
+2. **Peer-to-Peer**  
+In the peer-to-peer case, any player can activate their game instance as a server (aka host) and allow other players to connect to them.
+The host game instance is only active as long as the hosting player keeps their game open.
+The hosting player can participate in the game at the same time as hosting it.
+Each player still only connects to the game host, but the game host needs to connect to all other players.
 
 ## Object Ownership (Network Master)
 
@@ -34,26 +52,26 @@ This section explains how to define functions to allow them to be executed from 
 
 `func` = Only executable from the same game instance.
 
-`remote func` = Only executable from another connected instance of the game. Callable from any connected instance
+`remote func` = Only executable from another connected instance of the game. Callable from any connected instance.  
 `remotesync func` = Executes on all connected instances including the instance that called the function via RPC. Callable from all instances.
 
-`master func` = Only executes on the instance that is the network master of the node. Only callable from puppets.
+`master func` = Only executes on the instance that is the network master of the node. Only callable from puppets.  
 `mastersync func` = Executes on the instance that is the network master, and the instance that called the function via RPC. Only callable from puppets.
 
-`puppet func` = Only executes on puppets. Only callable from masters.
+`puppet func` = Only executes on puppets. Only callable from masters.  
 `puppetsync func` = Executes on all connected puppets, and locally. Only callable from masters.
 
 The same keywords apply to member variables
 
 `var`
 
-`remote var` = Only changed by another connected instance of the game. Changeable from any connected instance.
+`remote var` = Only changed by another connected instance of the game. Changeable from any connected instance.  
 `remotesync var` = Changes both the local variable and all connected variables. Changeable from all instances.
 
-`master var` = Only changes the variable on the network master. Only changeable from puppets.
+`master var` = Only changes the variable on the network master. Only changeable from puppets.  
 `mastersync var` = Changes the variable on the network master and locally. Only changeable from puppets.
 
-`puppet var` = Only changes the variable on puppet instances. Only changeable from masters.
+`puppet var` = Only changes the variable on puppet instances. Only changeable from masters.  
 `puppetsync var` = Changes the variable on puppet instances and locally. Only changeable from masters.
 
 
