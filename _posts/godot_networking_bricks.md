@@ -3,7 +3,7 @@
 ## Introduction
 
 This page is meant to be a quick reference guide to facilitate finding functions or specific syntax required for Godot networking.
-I suggest also reading the [official docs](https://docs.godotengine.org/en/stable/tutorials/networking/index.html), some of the content in this post is directly copied from them.
+I suggest also reading the [official docs](https://docs.godotengine.org/en/stable/tutorials/networking/index.html), some of the content in this post is directly copied from the docs.
 
 ## Establishing Connections
 
@@ -21,23 +21,48 @@ The host game instance is only active as long as the hosting player keeps their 
 The hosting player can participate in the game at the same time as hosting it.
 Each player still only connects to the game host, but the game host needs to connect to all other players.
 
+### Creating a server
+```
+var peer = NetworkedMultiplayerENet.new()
+peer.create_server(SERVER_PORT, MAX_PLAYERS)
+get_tree().network_peer = peer
+```
+
+### Connecting to a server as a client
+```
+var peer = NetworkedMultiplayerENet.new()
+peer.create_client(SERVER_IP, SERVER_PORT)
+get_tree().network_peer = peer
+```
+If you only want to test connections locally at first, use `127.0.0.1` as the `SERVER_IP`.
+
+### Connection-related scene tree signals
+Each game instance has a unique automatically-generated `network peer id`.
+The server instance always has an id of 1 while connected clients have a random integer.
+
+`connected_to_server()` = Only emitted on clients.  
+`connection_failed()` = Only emitted on clients.  
+`network_peer_connected(int id)` = emitted on all game instances when a client connects to the server. `id` is the `network peer id`.  
+`network_peer_disconnected(int id)` = emitted on all game instances when a client disconnects.  
+`server_disconnected()` = Only emitted on clients.
+
 ## Object Ownership (Network Master)
 
-Instances of the game can control a node on a different instance.
-For example the server instance can control the nodes on a client instance that represent all other players.
-The single instance which is the controller of any node is called the "Network Master" of the node.
+An Instance of the game can act as the "steward" or "master" of a node on a different instance.
+For example the server instance can govern the nodes on a client instance that represent all other players.
+The single instance which is the master of any node is called the "Network Master" of the node.
 
-**Helper Functions**
-`void set_network_master ( int id, bool recursive=true )` = Set the network master of a node and all its child nodes (recursive true by default).
-`bool is_network_master ( ) const` = Returns true if the current instance is the network master of the node the function is called in.
+### Related Functions  
+`void set_network_master(int id, bool recursive=true)` = Set the network master of a node and all its child nodes (recursive true by default).   
+`bool is_network_master() const` = Returns true if the current game instance is the network master of the node the function is called in.
 
-## RPCs
+## Remote Procedue Call (RPC)
 
-Remote procedure calls can execute a function on another instance of the game.
+RPCs can execute a function on another instance of the game.
 The node scene path must be the same on both instances in order for the rpc to execute.
 
-`rpc("function_name", <optional_args>)` = Executes the function on all connected instances.
-`rpc_id(<instance_id>,"function_name", <optional_args>)` = Only executes the function on the instance specified by the instance_id.
+`rpc("function_name", <optional_args>)` = Executes the function on all connected instances.  
+`rpc_id(<instance_id>, "function_name", <optional_args>)` = Only executes the function on the instance specified by the instance_id.
 
 `rset("variable", value)` = Updates the value of a member variable on all puppet nodes.
 `rset_id(<instance_id>, "variable", value)` = Updates the value of a member variable only on the node specified by the instance_id
