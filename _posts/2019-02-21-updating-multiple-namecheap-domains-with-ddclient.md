@@ -2,6 +2,7 @@
 layout: post
 title:  "Updating Multiple Namecheap Domains With ddclient"
 date:   2019-02-21 18:00:00 -0500
+updated: 2020-09-30 18:00:00 -0500
 categories: tech
 tags: [server management, linux]
 comments: true
@@ -60,37 +61,36 @@ To check what version of ddclient you may already have installed, use the follow
 ddclient -help | grep "ddclient version"
 ```
 
-## Easiest Install Option (3.8.3)
-The easiest solution is to simply install ddclient version 3.8.3. If you need a newer version (3.9.0) of ddclient, see the next section.
+## Easiest Install Option (3.9.1)
+The easiest solution is to simply install ddclient version 3.9.1.
+If you need an older version of ddclient, see the next section.
+
+Version 3.9.1 of ddclient was released in January 2020, so your best option is to use my install script until it gets included in later linux distributions.
+I've also just noticed that ddclient now has an excellent ["Packaging Status" list on their github page](https://github.com/ddclient/ddclient#distribution-package). This should help you decide if you can just install ddclient from your package manager or use my script.
 
 ### Ubuntu/Debian users:
-If you are running Ubuntu 18.04 you can get ddclient 3.8.3 from the package manager using the following:
-```
-sudo apt install ddclient
-```
 
-If you are running Ubuntu 16.04 or older, you can use an install script I created:
-1. Remove your currently installed ddclient (if installed).
+1. Remove your currently installed ddclient (if installed via apt).
 ```
 sudo apt remove ddclient
 ```
 
-2. Install ddclient 3.8.3.
+1. Install ddclient 3.9.1 using my script:
 ```
 wget https://raw.githubusercontent.com/icolwell/install_scripts/master/ddclient_install.bash
 bash ddclient_install.bash
 ```
 
-3. Edit the config at `/etc/ddclient/ddclient.conf`.
+1. Edit the config at `/etc/ddclient/ddclient.conf`.
 
-4. Restart ddclient.
+1. Restart ddclient:
 ```
 sudo service ddclient restart
 ```
 
 ### Other distro users:
 
-If you aren't running Ubuntu, [download ddclient 3.8.3](https://github.com/ddclient/ddclient/archive/v3.8.3.tar.gz) and follow the install instructions in the provided `README.md`.
+If you aren't running Ubuntu, [download ddclient 3.9.1](https://github.com/ddclient/ddclient/archive/v3.9.1.tar.gz) and follow the install instructions in the provided `README.md`.
 
 ## Other Install Option (3.9.0)
 If you need ddclient 3.9.0, it can be patched to add the parsing support needed for multiple namecheap domains.
@@ -133,3 +133,4 @@ sudo patch --verbose < /tmp/ddclient.patch
 - [Making DDClient work with multiple domains on namecheap](https://robertianhawdon.me.uk/2010/09/03/making-ddclient-work-with-multiple-domains-on-namecheap/) (old patch method)
 - [Linux Make ddclient Work with Multiple Namecheap Domains](https://thornelabs.blog/posts/linux-make-ddclient-work-with-multiple-namecheap-domains.html) (old patch method)
 - [How do I configure DDClient?](https://www.namecheap.com/support/knowledgebase/article.aspx/583/11/how-do-i-configure-ddclient) (namecheap docs)
+- [ddclient distribution packaging](https://github.com/ddclient/ddclient#distribution-package) (List of ddclient versions available on many linux distros)
