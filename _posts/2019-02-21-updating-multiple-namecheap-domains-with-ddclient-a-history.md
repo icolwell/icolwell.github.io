@@ -2,7 +2,7 @@
 layout: post
 title:  "Updating Multiple Namecheap Domains With ddclient - A History"
 date:   2019-02-21 18:00:00 -0500
-updated: 2019-02-22 14:00:00 -0500
+updated: 2020-09-30 19:00:00 -0500
 categories: tech
 tags: [server management, linux]
 comments: true
@@ -59,6 +59,19 @@ Eric Rucker submits a [bug report](https://sourceforge.net/p/ddclient/bugs/89/)
 explaining the problem with [PR #54](https://github.com/ddclient/ddclient/pull/54) ([r204](https://sourceforge.net/p/ddclient/code/204/)).
 I find this bug report and start to make sense of it all.
 Thanks Eric!
+
+**February 23rd, 2019**  
+I open a [pull request](https://github.com/ddclient/ddclient/pull/64) to restore the ability to update multiple domains.
+I also contact namecheap support about updating their docs, they say they'd look into it.
+
+**June 6th, 2019**  
+My [pull request](https://github.com/ddclient/ddclient/pull/64) gets merged into the master branch of ddclient.
+Future versions of ddclient will be able to update multiple namecheap domains again.
+The namecheap documentation is still outdated.
+
+**January 8th, 2020**  
+Version 3.9.1 of ddclient gets released which includes the fixes to re-enable multiple namecheap domain support, Yay!
+The namecheap documentation is still untouched, but is now correct since ddclient has been fixed.
 
 ## Summary
 
