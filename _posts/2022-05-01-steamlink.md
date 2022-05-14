@@ -17,7 +17,10 @@ for installing steamlink on a Raspberry Pi, it should be as easy as `sudo apt in
 ## The Problem
 However, after installing and running `steamlink`, the app failed to load with errors about missing libraries.
 
-TODO: Add missing library errors here
+```
+shell: error while loading shared libraries: libbcm_host.so: cannot open shared object file: No such file or directory
+screenblank: error while loading shared libraries: libbcm_host.so: cannot open shared object file: No such file or directory
+```
 
 ## The Solution
 
@@ -27,14 +30,45 @@ Run this line on your Raspberry Pi to install all of steamlink's dependencies:
 ```
 
 ```
+The script runs steamlink once in order to go through steamlink's first time setup which will prompt you to press Enter a few times.
 
 You should now have a functional version of steamlink installed.
+However! Launching steamlink will appear to work, but once you start streaming a game, you may get a black screen.
+There are a few small things to adjust in the boot config in order for steamlink to be able to decode the video stream.
 
-However! there were still a couple of configs to tune
-FKMS
-force 1080p
-snd-bcm2835.enable_compat_alsa=1
+In the `/boot/config.txt` file you should see the following:
 
+```
+# Enable DRM VC4 V3D driver
+dtoverlay=vc4-kms-v3d
+```
+The default is to use the KMS driver, but steamlink currently only seems to work with the FKMS driver.
+Change the line to the following by simply adding an "f":
+```
+dtoverlay=vc4-fkms-v3d
+```
+TODO: add link to difference between KMS and FKMS
+
+```
+# Enable DRM VC4 V3D driver
+dtoverlay=rpivid-v4l2
+dtoverlay=vc4-fkms-v3d
+#dtoverlay=vc4-kms-v3d,cma-512
+max_framebuffers=2
+```
+
+For 4K Televisions:
+Steamlink doesn't support 4K at the moment, so the only way I was able to get this to work was to force the raspberry pi to boot using 1080p resolution on the HDMI output.
+This will cause your TV to upscale to 4K to fill the full screen.
+
+boot/config.txt
+```
+hdmi_group=1
+hdmi_mode=16
+```
+
+
+Note about it (FKMS) working with retropie and kodi
 
 ## References
 
