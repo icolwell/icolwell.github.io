@@ -49,13 +49,6 @@ dtoverlay=vc4-fkms-v3d
 ```
 TODO: add link to difference between KMS and FKMS
 
-```
-# Enable DRM VC4 V3D driver
-dtoverlay=rpivid-v4l2
-dtoverlay=vc4-fkms-v3d
-#dtoverlay=vc4-kms-v3d,cma-512
-max_framebuffers=2
-```
 
 For 4K Televisions:
 Steamlink doesn't support 4K at the moment, so the only way I was able to get this to work was to force the raspberry pi to boot using 1080p resolution on the HDMI output.
@@ -66,6 +59,9 @@ boot/config.txt
 hdmi_group=1
 hdmi_mode=16
 ```
+
+Note about:
+You are running with less than 128 MB video memory, you may need to go to the Raspberry Pi Configuration and increase your GPU memory.
 
 
 Note about it (FKMS) working with retropie and kodi
