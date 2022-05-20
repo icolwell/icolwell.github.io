@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  "Steamlink"
-date:   2020-05-23 18:00:00 -0500
+date:   2022-05-20 18:00:00 -0500
 categories: tech
-tags: [godot, godot networking, game development]
+tags: [raspberrypi, steamlink, aarch64, bullseye]
 comments: true
 ---
 
@@ -15,7 +15,7 @@ According to [Valve's official setup guide](https://help.steampowered.com/en/faq
 for installing steamlink on a Raspberry Pi, it should be as easy as `sudo apt install steamlink`.
 
 ## The Problem
-However, after installing and running `steamlink`, the app failed to load with errors about missing libraries.
+However, after installing and running `steamlink`, the app failed to start with errors about missing libraries:
 
 ```
 shell: error while loading shared libraries: libbcm_host.so: cannot open shared object file: No such file or directory
@@ -28,11 +28,11 @@ I managed to sort through all the various libraries that were missing and create
 
 Run this line on your Raspberry Pi to install all of steamlink's dependencies:
 ```
-
+curl -sSL https://raw.githubusercontent.com/icolwell/install_scripts/master/steamlink_install.bash | bash
 ```
 The script runs steamlink once in order to go through steamlink's first time setup which will prompt you to press Enter a few times.
+Once the script completes, you should now have a functional version of steamlink installed.
 
-You should now have a functional version of steamlink installed.
 However! Launching steamlink will appear to work, but once you start streaming a game, you may get a black screen.
 There are a few small things to adjust in the boot config in order for steamlink to be able to decode the video stream.
 
@@ -45,28 +45,44 @@ dtoverlay=vc4-kms-v3d
 The default is to use the KMS driver, but steamlink currently only seems to work with the FKMS driver.
 Change the line to the following by simply adding an "f":
 ```
+# Enable DRM VC4 V3D driver
 dtoverlay=vc4-fkms-v3d
 ```
-TODO: add link to difference between KMS and FKMS
 
+I suggest googling ["FKMS vs. KMS driver"](https://www.google.com/search?q=FKMS+vs.+KMS+driver)
+if you want to learn more about the differences between KMS and FKMS.
 
-For 4K Televisions:
+#### [Optional] Suppress warning about video memory
+
+When launching steamlink, I get this warning:
+```
+You are running with less than 128 MB video memory, you may need to go to the Raspberry Pi Configuration and increase your GPU memory.
+```
+However, everything seems to work fine, and I believe it's safe to ignore.
+That being said, if you'd like to get rid of the warning, increase your video memory by using `raspi-config` or adding the following line to `/boot/config.txt`:
+```
+gpu_mem=128
+```
+
+#### [Optional] For 4K televisions:
 Steamlink doesn't support 4K at the moment, so the only way I was able to get this to work was to force the raspberry pi to boot using 1080p resolution on the HDMI output.
 This will cause your TV to upscale to 4K to fill the full screen.
 
-boot/config.txt
+Edit the `/boot/config.txt` file to add the following lines:
 ```
 hdmi_group=1
 hdmi_mode=16
 ```
 
-Note about:
-You are running with less than 128 MB video memory, you may need to go to the Raspberry Pi Configuration and increase your GPU memory.
+## Conclusion
 
+I was nervous about switching to FKMS driver since it seems like KMS is the recommended driver for bullseye and future versions.
+However, I have been able to run steamlink, kodi, and some retropie emulators just fine with FKMS on 64-bit bullseye.
+Hopefully steamlink will officially support the KMS driver in the future.
 
-Note about it (FKMS) working with retropie and kodi
+I hope this guide helped save you some time!
+Let me know if there's something I can improve or if steamlink has been properly released on 64-bit bullseye such that this script is no longer needed.
 
 ## References
 
-- [Godot Multiplayer API](https://docs.godotengine.org/en/stable/classes/class_multiplayerapi.html)
-- [Godot Networking Tutorials](https://docs.godotengine.org/en/stable/tutorials/networking/index.html)
+- [Valve's official steamlink setup guide](https://help.steampowered.com/en/faqs/view/6424-467A-31D9-C6CB)
