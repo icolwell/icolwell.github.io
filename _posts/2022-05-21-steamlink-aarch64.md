@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Install Steamlink on 64-bit Raspberry Pi OS Bullseye"
-date:   2022-05-21 18:00:00 -0500
+date:   2022-05-21 8:00:00 -0400
 categories: tech
 tags: [raspberrypi, steamlink, aarch64, bullseye]
 comments: true
