@@ -52,7 +52,7 @@ dtoverlay=vc4-fkms-v3d
 I suggest googling ["FKMS vs. KMS driver"](https://www.google.com/search?q=FKMS+vs.+KMS+driver)
 if you want to learn more about the differences between KMS and FKMS.
 
-#### [Optional] Suppress warning about video memory
+### [Optional] Suppress warning about video memory
 
 When launching steamlink, I get this warning:
 ```
@@ -64,7 +64,7 @@ That being said, if you'd like to get rid of the warning, increase your video me
 gpu_mem=128
 ```
 
-#### [Optional] For 4K televisions:
+### [Optional] For 4K televisions:
 Steamlink doesn't support 4K at the moment, so the only way I was able to get this to work was to force the raspberry pi to boot using 1080p resolution on the HDMI output.
 This will cause your TV to upscale to 4K to fill the full screen.
 
