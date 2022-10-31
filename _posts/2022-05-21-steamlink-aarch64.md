@@ -39,7 +39,7 @@ If you have "Raspberry Pi OS with desktop", then you need to exit the X server (
 
 If you try running `steamlink` from a terminal window in the desktop GUI, you will get the following error:
 
-![Steamlink X11 Error](steamlink_x11_error.png)
+![Steamlink X11 Error](/assets/steamlink_x11_error.png)
 
 So make sure you follow the rest of this guide in TTY2.
 Also, once `steamlink` is fully installed, you will always need to run it from a TTY outside the GUI.
