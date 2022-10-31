@@ -15,6 +15,7 @@ According to [Valve's official setup guide](https://help.steampowered.com/en/faq
 for installing steamlink on a Raspberry Pi, it should be as easy as `sudo apt install steamlink`.
 
 ## The Problem
+
 However, after installing and running `steamlink`, the app failed to start with errors about missing libraries:
 
 ```
@@ -24,12 +25,39 @@ screenblank: error while loading shared libraries: libbcm_host.so: cannot open s
 
 ## The Solution
 
-I managed to sort through all the various libraries that were missing and created an install script.
+Before proceeding, it is important to understand which version of 64-bit Raspberry Pi OS you have installed.
+There are two versions:
+- "Raspberry Pi OS Lite": No GUI, slimmed-down OS that boots to a terminal login prompt.
+- "Raspberry Pi OS with desktop": Full desktop GUI that boots to a login GUI screen.
 
+If you have "Raspberry Pi OS Lite", you can go ahead and skip to the "Installing Steamlink" section below.
+If you have "Raspberry Pi OS with desktop", then you need to exit the X server (the GUI) with the following keybaord shortcuts:
+
+- `Ctrl-Alt-F2`: Exit desktop GUI and open the TTY2 terminal.
+- `Ctrl-Alt-F7`: Return to the desktop GUI.
+
+If you try running `steamlink` from a terminal window in the desktop GUI, you will get the following error:
+
+![Steamlink X11 Error](steamlink_x11_error.png)
+
+So make sure you follow the rest of this guide in TTY2.
+Also, once `steamlink` is fully installed, you will always need to run it from a TTY outside the GUI.
+
+### Installing Steamlink
+
+I managed to sort through all the various libraries that were missing and created an install script.
 Run this line on your Raspberry Pi to install all of steamlink's dependencies:
 ```
 curl -sSL https://raw.githubusercontent.com/icolwell/install_scripts/master/steamlink_install.bash | bash
 ```
+Another option (especially if you are reading this guide on your Raspberry Pi browser) is to first download the script, then execute the script once switched to TTY2.
+For example:
+```
+curl -sSL https://raw.githubusercontent.com/icolwell/install_scripts/master/steamlink_install.bash --output steamlink_install.bash
+# "Ctrl-Alt-F2" and login
+bash steamlink_install.bash
+```
+
 The script runs steamlink once in order to go through steamlink's first time setup which will prompt you to press Enter a few times.
 Once the script completes, you should now have a functional version of steamlink installed.
 
@@ -53,7 +81,6 @@ I suggest googling ["FKMS vs. KMS driver"](https://www.google.com/search?q=FKMS+
 if you want to learn more about the differences between KMS and FKMS.
 
 ### [Optional] Suppress warning about video memory
-
 When launching steamlink, I get this warning:
 ```
 You are running with less than 128 MB video memory, you may need to go to the Raspberry Pi Configuration and increase your GPU memory.
