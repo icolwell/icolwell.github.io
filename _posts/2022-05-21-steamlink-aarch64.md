@@ -2,6 +2,7 @@
 layout: post
 title:  "Install Steamlink on 64-bit Raspberry Pi OS Bullseye"
 date:   2022-05-21 8:00:00 -0400
+updated: 2022-10-30 22:00:00 -0400
 categories: tech
 tags: [raspberrypi, steamlink, aarch64, bullseye]
 comments: true
@@ -27,8 +28,8 @@ screenblank: error while loading shared libraries: libbcm_host.so: cannot open s
 
 Before proceeding, it is important to understand which version of 64-bit Raspberry Pi OS you have installed.
 There are two versions:
-- "Raspberry Pi OS Lite": No GUI, slimmed-down OS that boots to a terminal login prompt.
-- "Raspberry Pi OS with desktop": Full desktop GUI that boots to a login GUI screen.
+- **Raspberry Pi OS Lite**: No GUI, slimmed-down OS that boots to a terminal login prompt.
+- **Raspberry Pi OS with desktop**: Full desktop GUI that boots to a login GUI screen.
 
 If you have "Raspberry Pi OS Lite", you can go ahead and skip to the "Installing Steamlink" section below.
 If you have "Raspberry Pi OS with desktop", then you need to exit the X server (the GUI) with the following keybaord shortcuts:
