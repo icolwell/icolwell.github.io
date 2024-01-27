@@ -4,7 +4,7 @@ title:  "Updating Multiple Namecheap Domains With ddclient - A History"
 date:   2019-02-21 18:00:00 -0500
 updated: 2020-09-30 19:00:00 -0500
 categories: tech
-tags: [server management, linux]
+tags: [server management, linux, ddclient]
 comments: true
 ---
 
